@@ -10,17 +10,21 @@ import "styles/components/header.scss";
  */
 function Header() {
   return (
-    <nav className="main-nav">
-      <Link className="main-nav-logo" to="/">
+    <nav>
+      <Link to="/">
         <Logo />
       </Link>
 
       <div className="main-nav-links">
-        <Link className="main-nav-item" to="/">
-          Create Employee
+        <Link to="/">
+          Home
         </Link>
 
-        <Link className="main-nav-item" to="/employees">
+        <Link to="/employees/new">
+          New Employee
+        </Link>
+
+        <Link to="/employees">
           List Employees
         </Link>
       </div>

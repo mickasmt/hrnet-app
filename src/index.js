@@ -6,8 +6,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "styles/main.scss";
 
 // pages
-import CreateEmployee from "pages/CreateEmployee";
-import Employees from "pages/Employees";
+import Home from "pages/Home";
+import NewEmployee from "pages/NewEmployee";
+import ListEmployees from "pages/ListEmployees";
 
 // components
 import Error from "components/Error";
@@ -20,8 +21,9 @@ root.render(
       <Router>
         <Layout>
           <Routes>
-            <Route path="/" exact element={<CreateEmployee />} />
-            <Route path="/employees" element={<Employees />} />
+            <Route path="/" exact element={<Home />} />
+            <Route path="/employees/new" element={<NewEmployee />} />
+            <Route path="/employees" element={<ListEmployees />} />
             <Route path="*" element={<Error />} />
           </Routes>
         </Layout>
