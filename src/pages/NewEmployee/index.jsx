@@ -1,9 +1,14 @@
-import React from 'react'
+import EmployeeForm from "components/Forms/EmployeeForm";
+import React from "react";
 
 function NewEmployee() {
   return (
-    <div>NewEmployee</div>
-  )
+    <main className="f-container">
+      <h2 className="text-2xl font-bold py-12">Create Employee</h2>
+
+      <EmployeeForm />
+    </main>
+  );
 }
 
-export default NewEmployee
+export default NewEmployee;

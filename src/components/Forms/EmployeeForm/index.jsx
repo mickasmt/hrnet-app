@@ -1,20 +1,14 @@
 import React, { useState } from "react";
 import * as Yup from "yup";
 import PropTypes from "prop-types";
-import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
-import { updateProfile } from "redux/features/userSlice";
 
 /**
  * User Form Component
  * @param {Function} toggleUserForm Function for display/hide user form
  * @returns {React.ReactElement}
  */
-function UserForm({ toggleUserForm }) {
-  const dispatch = useDispatch();
-
+function EmployeeForm() {
   const [loading, setLoading] = useState(false);
-  const { firstName, lastName } = useSelector((state) => state.user);
 
   const validationSchema = Yup.object().shape({
     firstname: Yup.string()
@@ -25,7 +19,7 @@ function UserForm({ toggleUserForm }) {
       .required("Lastname required !"),
   });
 
-  const handleUpdateUser = (e) => {
+  const handleCreateUser = (e) => {
     e.preventDefault();
     setLoading(true);
 
@@ -33,55 +27,100 @@ function UserForm({ toggleUserForm }) {
       firstname: e.target.firstname.value,
       lastname: e.target.lastname.value,
     };
-
-    validationSchema
-      .validate(formData, { abortEarly: false })
-      .then(() => {
-        dispatch(updateProfile(formData))
-          .unwrap()
-          .then(() => {
-            setLoading(false);
-            toggleUserForm();
-            toast.success("Update profile successful !");
-          })
-          .catch((err) => {
-            setLoading(false);
-            toast.error(err.split(":")[1]);
-          });
-      })
-      .catch((err) => {
-        setLoading(false);
-        toast.error(err.errors.join("\n"));
-      });
   };
 
   return (
-    <form className="user-form" onSubmit={handleUpdateUser}>
-      <div className="inputContainer">
-        <div className="input-wrapper">
-          <input type="text" id="firstname" defaultValue={firstName} />
+    <form className="user-form" onSubmit={handleCreateUser}>
+      <form action="#" id="create-employee">
+        <div className="flex flex-col md:flex-row gap-10">
+          {/* first colunmn */}
+          <div className="flex flex-col w-full">
+            <div>
+              <label
+                for="UserEmail"
+                class="block text-md font-medium text-gray-700"
+              >
+                Firstname
+              </label>
+
+              <input
+                type="text"
+                id="UserEmail"
+                placeholder="john@rhcp.com"
+                class="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
+              />
+            </div>
+
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name" />
+
+            <label for="last-name">Last Name</label>
+            <input type="text" id="last-name" />
+
+            <label for="date-of-birth">Date of Birth</label>
+            <input id="date-of-birth" type="text" />
+
+            <label for="start-date">Start Date</label>
+            <input id="start-date" type="text" />
+          </div>
+
+          {/* second column */}
+          <div className="flex flex-col w-full">
+            <fieldset className="flex flex-col w-full">
+              <legend>Address</legend>
+
+              <label for="street">Street</label>
+              <input id="street" type="text" />
+
+              <label for="city">City</label>
+              <input id="city" type="text" />
+
+              <label for="state">State</label>
+              <select name="state" id="state"></select>
+
+              <label for="zip-code">Zip Code</label>
+              <input id="zip-code" type="number" />
+            </fieldset>
+          </div>
         </div>
 
-        <div className="input-wrapper">
-          <input type="text" id="lastname" defaultValue={lastName} />
-        </div>
-      </div>
+        <div className="pt-8 flex flex-col sm:flex-row justify-between items-center">
+          <div>
+            <label for="department">Department</label>
+            <select name="department" id="department">
+              <option>Sales</option>
+              <option>Marketing</option>
+              <option>Engineering</option>
+              <option>Human Resources</option>
+              <option>Legal</option>
+            </select>
+          </div>
 
-      <div className="user-form-buttons">
-        <button className="user-form-button">
-          {loading ? "Loading..." : "Save"}
-        </button>
-        <button className="user-form-button" onClick={() => toggleUserForm()}>
-          Cancel
-        </button>
-      </div>
+          <button
+            onClick={() => console.log("save")}
+            className="inline-flex items-center rounded border border-lime-700 bg-lime-700 px-7 py-3 text-white hover:bg-transparent hover:text-lime-700 focus:outline-none focus:ring active:text-lime-500"
+          >
+            <span className="text-sm font-medium">Save</span>
+
+            <svg
+              className="ml-3 h-5 w-5"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
+            </svg>
+          </button>
+        </div>
+      </form>
     </form>
   );
 }
 
-UserForm.propTypes = {
-  /** Function for display/hide user form */
-  toggleUserForm: PropTypes.func.isRequired,
-};
-
-export default UserForm;
+export default EmployeeForm;

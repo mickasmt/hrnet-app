@@ -29,7 +29,7 @@ function Header() {
         </li>
 
         <li>
-          <Link className="rounded-lg px-3 py-2" href="">
+          <Link className="rounded-lg px-3 py-2" to="/employees/new">
             {" "}
             New employee{" "}
           </Link>
@@ -38,8 +38,7 @@ function Header() {
         <li>
           <Link
             className="inline-flex items-center rounded-lg px-3 py-2"
-            href=""
-            target="_blank"
+            to="/employees"
           >
             List employees
           </Link>
