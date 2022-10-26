@@ -8,24 +8,43 @@ import Logo from "components/UI/Logo";
  */
 function Header() {
   return (
-    <nav>
-      <Link to="/">
+    <nav
+      aria-label="Site Nav"
+      className="f-container flex items-center justify-between p-4"
+    >
+      <Link
+        to="/"
+        className="inline-flex h-12 w-12 items-center justify-center bg-white"
+      >
+        <span className="sr-only">Logo</span>
         <Logo />
       </Link>
 
-      <div className="main-nav-links">
-        <Link to="/">
-          Home
-        </Link>
+      <ul className="flex items-center gap-2 text-base font-medium text-gray-500">
+        <li className="hidden lg:block">
+          <Link className="rounded-lg px-3 py-2" to="/">
+            {" "}
+            Home{" "}
+          </Link>
+        </li>
 
-        <Link to="/employees/new">
-          New Employee
-        </Link>
+        <li>
+          <Link className="rounded-lg px-3 py-2" href="">
+            {" "}
+            New employee{" "}
+          </Link>
+        </li>
 
-        <Link to="/employees">
-          List Employees
-        </Link>
-      </div>
+        <li>
+          <Link
+            className="inline-flex items-center rounded-lg px-3 py-2"
+            href=""
+            target="_blank"
+          >
+            List employees
+          </Link>
+        </li>
+      </ul>
     </nav>
   );
 }

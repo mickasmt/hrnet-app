@@ -9,7 +9,7 @@ body,
 }
 
 .f-container {
-  @apply px-5 lg:px-0 md:max-w-screen-lg md:mx-auto ;
+  @apply px-5 lg:px-0 lg:max-w-screen-lg lg:mx-auto ;
 }
 
 /* main {

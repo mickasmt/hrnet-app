@@ -18,8 +18,8 @@ const homeInfos = [
 
 function Home() {
   return (
-    <main className="h-3/4 w-full flex justify-center items-center f-container">
-      <div className="flex space-x-5">
+    <main className="h-full md:h-3/4 w-full flex justify-center md:items-center f-container">
+      <div className="flex flex-col space-y-4 md:flex-row md:space-x-5 md:space-y-0">
         {homeInfos.map((info) => {
           return <HomeCard data={info} key={info.id} />;
         })}
