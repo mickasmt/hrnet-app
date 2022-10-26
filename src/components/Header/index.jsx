@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Logo from "components/UI/Logo";
 
-import "styles/components/header.scss";
-
 /**
  * Header Component
  * @returns {React.ReactElement}

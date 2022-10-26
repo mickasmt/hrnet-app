@@ -5,8 +5,6 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfile } from "redux/features/userSlice";
 
-import "styles/components/forms/user-form.scss";
-
 /**
  * User Form Component
  * @param {Function} toggleUserForm Function for display/hide user form
