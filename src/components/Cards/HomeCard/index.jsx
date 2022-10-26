@@ -5,7 +5,7 @@ function HomeCard({ data }) {
   return (
     <Link to={data.href} className="group">
       <article className="rounded-lg border border-gray-100 p-4 shadow-sm transition hover:shadow-lg sm:p-6">
-        <span className="inline-block rounded bg-green-600 p-2 text-white">
+        <span className="inline-block rounded bg-lime-600 p-2 text-white">
           {data.icon}
         </span>
 
@@ -18,7 +18,7 @@ function HomeCard({ data }) {
         </p>
 
         <div
-          className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-green-600"
+          className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-lime-700"
         >
           Find out more
           <span
