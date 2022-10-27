@@ -1,9 +1,11 @@
 import React from "react";
+import Title from "components/UI/Title";
 
 function ListEmployees() {
   return (
-    <main className="f-container">
-      <h2 className="text-2xl font-bold py-12">List Employees</h2>
+    <main className="f-container pt-6 pb-10 md:py-12">
+      <Title text="List Employees" />
+
 
     </main>
   );

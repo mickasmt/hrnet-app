@@ -1,11 +1,11 @@
-import EmployeeForm from "components/Forms/EmployeeForm";
 import React from "react";
+import Title from "components/UI/Title";
+import EmployeeForm from "components/Forms/EmployeeForm";
 
 function NewEmployee() {
   return (
-    <main className="f-container">
-      <h2 className="text-2xl font-bold py-12">Create Employee</h2>
-
+    <main className="f-container pt-6 pb-10 md:py-12">
+      <Title text="Create Employee" />
       <EmployeeForm />
     </main>
   );

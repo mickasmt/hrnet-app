@@ -2,16 +2,26 @@
 @tailwind utilities;
 @tailwind components;
 
-html, 
+html,
 body,
 #root {
   height: 100%;
 }
 
 .f-container {
-  @apply px-5 lg:px-0 lg:max-w-screen-lg lg:mx-auto ;
+  @apply px-5 lg:px-0 lg:max-w-screen-lg lg:mx-auto;
 }
 
-/* main {
-  min-height: 80vh;
-} */
+@font-face {
+  font-family: "CopperGothicReg";
+  src: url("/src/assets/fonts/copper-gothic-reg.woff2") format("woff2");
+}
+
+.logo-font {
+  font-family: "CopperGothicReg";
+}
+
+.title:after {
+  content: "";
+  @apply bg-lime-600 rounded-full h-1 block mt-0.5 w-8;
+}

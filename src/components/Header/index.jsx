@@ -14,9 +14,8 @@ function Header() {
     >
       <Link
         to="/"
-        className="inline-flex h-12 w-12 items-center justify-center bg-white"
+        className="inline-flex h-12 w-auto items-center justify-center bg-white"
       >
-        <span className="sr-only">Logo</span>
         <Logo />
       </Link>
 

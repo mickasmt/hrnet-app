@@ -7,15 +7,7 @@ import PropTypes from "prop-types";
  * @returns {React.ReactElement}
  */
 function Title({ text }) {
-  return (
-    <div className="title">
-      <h1>
-        Welcome back
-        <br />
-        {text} !
-      </h1>
-    </div>
-  );
+  return <h1 className="title text-gray-900 text-2xl font-bold pb-10">{text}</h1>;
 }
 
 Title.propTypes = {
