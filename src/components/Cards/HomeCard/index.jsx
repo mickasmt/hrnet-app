@@ -21,12 +21,6 @@ function HomeCard({ data }) {
           className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-lime-700"
         >
           Find out more
-          <span
-            aria-hidden="true"
-            className="block transition group-hover:translate-x-0.5"
-          >
-            &rarr;
-          </span>
         </div>
       </article>
     </Link>

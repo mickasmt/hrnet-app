@@ -1,8 +1,11 @@
 import React from "react";
 
-function Label({ text, labelFor}) {
+function Label({ text, labelFor }) {
   return (
-    <label for={labelFor} class="block text-sm font-medium text-gray-700">
+    <label
+      htmlFor={labelFor}
+      className="block text-sm font-medium text-gray-700"
+    >
       {text}
     </label>
   );
