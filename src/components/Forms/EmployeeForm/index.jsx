@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import Label from "../Label";
 import Input from "../Input";
 import Fieldset from "../Fieldset";
-import SubmitButton from "../SubmitButton";
+import SubmitButton from "components/Buttons/SubmitButton";
 
 
 /**
