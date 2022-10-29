@@ -66,7 +66,7 @@ function EmployeeForm() {
               id="date-of-birth"
               name="dateOfBirth"
               type="text"
-              placeholder="Select a date"
+              placeholder="Picker"
             />
           </div>
 
@@ -76,7 +76,7 @@ function EmployeeForm() {
               id="start-date"
               name="startDate"
               type="text"
-              placeholder="Select a date"
+              placeholder="Picker"
             />
           </div>
 
@@ -86,7 +86,7 @@ function EmployeeForm() {
               id="department"
               name="department"
               type="text"
-              placeholder="Select a department"
+              placeholder="Select"
             />
           </div>
         </div>
@@ -123,7 +123,7 @@ function EmployeeForm() {
                 id="state"
                 name="state"
                 type="text"
-                placeholder="Enter a state"
+                placeholder="Select"
               />
             </div>
 
