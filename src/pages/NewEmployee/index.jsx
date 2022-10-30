@@ -1,7 +1,14 @@
 import React from "react";
 import Title from "components/UI/Title";
 import EmployeeForm from "components/Forms/EmployeeForm";
-import Modal from "components/Library/Modal";
+// import Modal from "components/Library/Modal";
+import Select from "components/Library/Select";
+
+const data = [
+  { value: "chocolate", label: "Chocolate" },
+  { value: "strawberry", label: "Strawberry" },
+  { value: "vanilla", label: "Vanilla" },
+];
 
 function NewEmployee() {
   return (
@@ -9,7 +16,7 @@ function NewEmployee() {
       <Title text="Create Employee" />
       <EmployeeForm />
 
-      <Modal
+      {/* <Modal
         icon="jjj"
         overlayColor="#4b5563"
         overlayOpacity={0.75}
@@ -22,13 +29,20 @@ function NewEmployee() {
           >
             Deactivate
           </button>,
-          // <button
-          //   type="button"
-          //   className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-          // >
-          //   Cancel
-          // </button>
+          <button
+            type="button"
+            className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+          >
+            Cancel
+          </button>
         ]}
+      /> */}
+
+      <Select
+        options={data}
+        selected=""
+        placeholder="Select a department"
+        styles="w-full mt-4 rounded-md border-gray-200 shadow-sm sm:text-sm"
       />
     </main>
   );
