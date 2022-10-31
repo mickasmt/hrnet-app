@@ -1,7 +1,6 @@
 import React from "react";
 import Title from "components/UI/Title";
 import EmployeeForm from "components/Forms/EmployeeForm";
-// import Modal from "components/Library/Modal";
 
 function NewEmployee() {
   return (

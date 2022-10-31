@@ -9,6 +9,8 @@ import SubmitButton from "components/Buttons/SubmitButton";
 
 // data
 import dataSelectors from "data/selectors.json";
+import { GoCheck } from "react-icons/go";
+import { Link } from "react-router-dom";
 
 /**
  * User Form Component
@@ -16,7 +18,12 @@ import dataSelectors from "data/selectors.json";
  * @returns {React.ReactElement}
  */
 function EmployeeForm() {
+  const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const closeModal = () => {
+    setOpenModal(false);
+  };
 
   const validationSchema = Yup.object().shape({
     firstname: Yup.string()
@@ -30,6 +37,7 @@ function EmployeeForm() {
   const handleCreateUser = (e) => {
     e.preventDefault();
     setLoading(true);
+    setOpenModal(true);
 
     console.log("here");
 
@@ -38,12 +46,6 @@ function EmployeeForm() {
       lastname: e.target.lastname.value,
     };
   };
-
-  const data = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
 
   return (
     <>
@@ -158,27 +160,32 @@ function EmployeeForm() {
         </div>
       </form>
 
-      <Modal
-        icon="jjj"
-        overlayColor="#4b5563"
-        overlayOpacity={0.75}
-        title="Employee created !"
-        description="Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone."
-        buttons={[
-          <button
-            type="button"
-            className="inline-flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-          >
-            Deactivate
-          </button>,
-          <button
-            type="button"
-            className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-          >
-            Cancel
-          </button>
-        ]}
-      />
+      {openModal && (
+        <Modal
+          icon={<GoCheck className="h-6 w-6 text-green-700" />}
+          iconBgColor="#E7FCDC"
+          overlayColor="#4b5563"
+          overlayOpacity={0.75}
+          title="Employee created !"
+          description="Are you sure you want to deactivate your account? All of your data will be permanently removed. This action cannot be undone."
+          onClose={() => closeModal()}
+          buttons={[
+            <button
+              type="button"
+              onClick={() => closeModal()}
+              className="inline-flex w-full justify-center rounded-md border border-transparent bg-lime-700 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-lime-800 focus:outline-none  sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              Close
+            </button>,
+            <Link
+              to="/employees"
+              className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+              View all employees
+            </Link>,
+          ]}
+        />
+      )}
     </>
   );
 }

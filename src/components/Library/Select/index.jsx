@@ -10,15 +10,15 @@ function Select({ name, options, selected, placeholder, styles }) {
   };
 
   return (
-    <select name={name} className={styles} value={value} onChange={handleChange}>
+    <select name={name} className={styles} defaultValue={value} onChange={handleChange}>
       {!selected && (
-        <option value="" disabled selected hidden>
+        <option value="" disabled hidden>
           {placeholder ? placeholder : "Select an option"}
         </option>
       )}
 
       {options && options.map(option => (
-        <option value={option.value}>{option.label}</option>
+        <option key={option.value} value={option.value}>{option.label}</option>
       ))}
     </select>
   );
