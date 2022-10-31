@@ -1,6 +1,8 @@
 import React from "react";
 import HomeCard from "components/Cards/HomeCard";
-import { HiUserGroup, HiUserPlus } from 'react-icons/hi2';
+
+import {ReactComponent as HiUserPlus} from "assets/icons/user-plus.svg";
+import {ReactComponent as HiUserGroup} from "assets/icons/user-group.svg";
 
 const homeInfos = [
   {

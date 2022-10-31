@@ -1,7 +1,8 @@
 import React from "react";
 import classNames from "classnames";
-import { CgSpinner } from "react-icons/cg";
-import { HiArrowLongRight } from "react-icons/hi2";
+
+import {ReactComponent as Spinner} from "assets/icons/spinner.svg";
+import {ReactComponent as HiArrowLongRight} from "assets/icons/arrow-long-right.svg";
 
 function SubmitButton({ loading, name }) {
   return (
@@ -19,7 +20,7 @@ function SubmitButton({ loading, name }) {
     >
       {loading ? (
         <>
-          <CgSpinner className="mr-3 w-6 h-6 motion-reduce:hidden animate-spin" />
+          <Spinner className="mr-3 w-6 h-6 motion-reduce:hidden animate-spin" />
           <span className="text-sm font-medium">Loading...</span>
         </>
       ) : (

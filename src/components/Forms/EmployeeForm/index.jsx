@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import Label from "../Label";
 import Input from "../Input";
@@ -7,10 +8,10 @@ import Modal from "components/Library/Modal";
 import Select from "components/Library/Select";
 import SubmitButton from "components/Buttons/SubmitButton";
 
+import {ReactComponent as Check} from "assets/icons/check.svg";
+
 // data
 import dataSelectors from "data/selectors.json";
-import { GoCheck } from "react-icons/go";
-import { Link } from "react-router-dom";
 
 /**
  * User Form Component
@@ -162,7 +163,7 @@ function EmployeeForm() {
 
       {openModal && (
         <Modal
-          icon={<GoCheck className="h-6 w-6 text-green-700" />}
+          icon={<Check className="h-6 w-6 text-green-700" />}
           iconBgColor="#E7FCDC"
           overlayColor="#4b5563"
           overlayOpacity={0.75}
