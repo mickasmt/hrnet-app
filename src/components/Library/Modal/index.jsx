@@ -1,4 +1,5 @@
 import React from "react";
+import { Fragment } from "react";
 
 function Modal({
   icon,
@@ -86,7 +87,11 @@ function Modal({
             </div>
             {buttons.length > 0 && (
               <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                {buttons}
+                {buttons.map((button, idx) => (
+                  <Fragment key={idx}>
+                    {button}
+                  </Fragment>
+                ))}
               </div>
             )}
           </div>
