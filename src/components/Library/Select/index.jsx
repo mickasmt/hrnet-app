@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-function Select({ options, selected, placeholder, styles }) {
+function Select({ name, options, selected, placeholder, styles }) {
   const [value, setValue] = useState(selected || "");
 
   const handleChange = event => {
@@ -10,7 +10,7 @@ function Select({ options, selected, placeholder, styles }) {
   };
 
   return (
-    <select className={styles} value={value} onChange={handleChange}>
+    <select name={name} className={styles} value={value} onChange={handleChange}>
       {!selected && (
         <option value="" disabled selected hidden>
           {placeholder ? placeholder : "Select an option"}

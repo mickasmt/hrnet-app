@@ -19,8 +19,8 @@ function SubmitButton({ loading, name }) {
     >
       {loading ? (
         <>
-          <span className="text-sm font-medium">Loading</span>
-          <CgSpinner className="ml-3 w-6 h-6 animate-spin" />
+          <CgSpinner className="mr-3 w-6 h-6 motion-reduce:hidden animate-spin" />
+          <span className="text-sm font-medium">Loading...</span>
         </>
       ) : (
         <>
