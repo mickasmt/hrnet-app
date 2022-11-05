@@ -61,6 +61,7 @@ function Table({ items, columns, selectDisplayItems }) {
           <div className="py-2 inline-block min-w-full sm:px-6 lg:px-8">
             <div className="overflow-x-auto">
               <table className="min-w-full border text-center">
+                {/* Header Table */}
                 <thead className="border-b">
                   <tr>
                     {columns.map((column) => {
@@ -76,23 +77,38 @@ function Table({ items, columns, selectDisplayItems }) {
                     })}
                   </tr>
                 </thead>
+
+                {/* Body Table */}
                 <tbody>
-                  {data.map((obj, idx) => {
-                    return (
-                      <tr key={idx} className="border-b">
-                        {columns.map((column, idx) => {
-                          return (
-                            <td
-                              key={idx}
-                              className="text-sm text-gray-700 px-5 py-3 whitespace-nowrap border-r"
-                            >
-                              {obj[column.data]}
-                            </td>
-                          );
-                        })}
-                      </tr>
-                    );
-                  })}
+                  {data.length > 0 ? (
+                    <>
+                      {data.map((obj, idx) => {
+                        return (
+                          <tr key={idx} className="border-b">
+                            {columns.map((column, idx) => {
+                              return (
+                                <td
+                                  key={idx}
+                                  className="text-sm text-gray-700 px-5 py-3 whitespace-nowrap border-r"
+                                >
+                                  {obj[column.data]}
+                                </td>
+                              );
+                            })}
+                          </tr>
+                        );
+                      })}
+                    </>
+                  ) : (
+                    <tr className="border-b">
+                      <td
+                        colSpan={columns.length}
+                        className="text-sm text-gray-700 px-5 py-3 whitespace-nowrap bg-gray-100"
+                      >
+                        No matching records found
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>

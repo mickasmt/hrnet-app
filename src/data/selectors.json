@@ -262,11 +262,11 @@
   "selectItemsTable": [
     {
       "label": "10",
-      "value": 2
+      "value": 10
     },
     {
       "label": "25",
-      "value": 10
+      "value": 25
     },
     {
       "label": "50",
