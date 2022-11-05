@@ -47,7 +47,7 @@ const Pagination = ({
   if (totalPages === 0) return null;
 
   return (
-    <nav className="flex justify-between items-center pt-3"></nav>
+    <nav className="flex justify-between items-center pt-3">
       {/* text */}
       <span className="text-gray-500">
         Showing{" "}
