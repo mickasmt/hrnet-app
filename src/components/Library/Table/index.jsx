@@ -3,10 +3,10 @@ import Select from "../Select";
 import Pagination from "./Pagination";
 import Search from "./Search";
 
+
 function Table({ data = 0, columns, selectDisplayItems }) {
-  const [search, setSearch] = useState("");
+  // const [search, setSearch] = useState("");
   const [itemsPerPage, setItemsPerPage] = useState(selectDisplayItems[0].value);
-  // const [totalItems, setTotalItems] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
   // setTotalItems(data.length);
@@ -43,7 +43,7 @@ function Table({ data = 0, columns, selectDisplayItems }) {
                         <th
                         key={column.title}
                           scope="col"
-                          className="text-sm font-medium text-gray-900 px-5 py-4 border-r"
+                          className="text-sm font-medium text-gray-900 px-5 py-3 border-r"
                         >
                           {column.title}
                         </th>
@@ -57,7 +57,7 @@ function Table({ data = 0, columns, selectDisplayItems }) {
                       <tr key={idx} className="border-b">
                         {columns.map((column, idx) => {
                           return (
-                            <td key={idx} className="text-sm text-gray-700 px-5 py-4 whitespace-nowrap border-r">
+                            <td key={idx} className="text-sm text-gray-700 px-5 py-3 whitespace-nowrap border-r">
                               {obj[column.data]}
                             </td>
                           );

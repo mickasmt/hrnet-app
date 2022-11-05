@@ -72,6 +72,9 @@
 import classNames from "classnames";
 import React, { useEffect, useState, useMemo } from "react";
 
+import {ReactComponent as ArrowRight} from "assets/icons/arrow-right.svg";
+import {ReactComponent as ArrowLeft} from "assets/icons/arrow-left.svg";
+
 const Pagination = ({
   total = 0,
   itemsPerPage = 10,
@@ -119,49 +122,25 @@ const Pagination = ({
 
       {/* buttons */}
       <ul className="inline-flex items-center -space-x-px">
-        <li
+        <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
           className="block py-2 px-3 ml-0 cursor-pointer leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
         >
           <span className="sr-only">Previous</span>
-          <svg
-            className="w-5 h-5"
-            aria-hidden="true"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fillRule="evenodd"
-              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-              clipRule="evenodd"
-            ></path>
-          </svg>
-        </li>
+          <ArrowLeft className="w-5 h-5" />
+        </button>
 
         {paginationItems}
 
-        <li
+        <button
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
           className="block py-2 px-3 leading-tight cursor-pointer text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
         >
           <span className="sr-only">Next</span>
-          <svg
-            className="w-5 h-5"
-            aria-hidden="true"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fillRule="evenodd"
-              d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-              clipRule="evenodd"
-            ></path>
-          </svg>
-        </li>
+          <ArrowRight className="w-5 h-5" />
+        </button>
       </ul>
     </nav>
   );
