@@ -15,8 +15,7 @@ function Table({ items, columns, selectDisplayItems }) {
     if (search) {
       computedItems = computedItems.filter(
         (item) =>
-          item["firstName"].toLowerCase().includes(search.toLowerCase()) ||
-          item["lastName"].toLowerCase().includes(search.toLowerCase())
+          Object.values(item).some(el => el.toLowerCase().includes(search.toLowerCase()))
       );
     }
 
