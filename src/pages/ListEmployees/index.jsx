@@ -24,7 +24,7 @@ function ListEmployees() {
       <Title text="List Employees" />
 
       <Table
-        data={data.employees}
+        items={data.employees}
         columns={columns}
         selectDisplayItems={dataSelectors.selectItemsTable}
       />

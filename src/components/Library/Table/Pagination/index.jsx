@@ -5,17 +5,21 @@ import { ReactComponent as ArrowRight } from "assets/icons/arrow-right.svg";
 import { ReactComponent as ArrowLeft } from "assets/icons/arrow-left.svg";
 
 const Pagination = ({
-  total = 0,
-  itemsPerPage = 10,
+  total,
+  itemsPerPage,
   currentPage = 1,
   onPageChange,
 }) => {
   const [totalPages, setTotalPages] = useState(0);
+  const [minPerPage, setMinPerPage] = useState(0);
+  const [maxPerPage, setMaxPerPage] = useState(0);
 
   useEffect(() => {
     if (total > 0 && itemsPerPage > 0)
       setTotalPages(Math.ceil(total / itemsPerPage));
-  }, [total, itemsPerPage]);
+      setMinPerPage((currentPage - 1) * itemsPerPage + 1);
+      setMaxPerPage((currentPage - 1) * itemsPerPage + itemsPerPage);
+  }, [total, itemsPerPage, currentPage]);
 
   const paginationItems = useMemo(() => {
     const pages = [];
@@ -38,15 +42,20 @@ const Pagination = ({
     }
 
     return pages;
-  }, [totalPages, currentPage]);
+  }, [totalPages, currentPage, onPageChange]);
 
   if (totalPages === 0) return null;
 
   return (
-    <nav className="flex justify-between items-center pt-3">
+    <nav className="flex justify-between items-center pt-3"></nav>
+      {/* text */}
       <span className="text-gray-500">
-        Showing <span className="font-semibold text-gray-900">1 to 10</span> of{" "}
-        <span className="font-semibold text-gray-900">{total}</span> entries
+        Showing{" "}
+        <span className="font-semibold text-gray-900">
+          {minPerPage} to{" "}
+          {maxPerPage < total ? maxPerPage : total}
+        </span>{" "}
+        of <span className="font-semibold text-gray-900">{total}</span> entries
       </span>
 
       {/* buttons */}
