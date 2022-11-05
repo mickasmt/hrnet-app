@@ -72,8 +72,8 @@
 import classNames from "classnames";
 import React, { useEffect, useState, useMemo } from "react";
 
-import {ReactComponent as ArrowRight} from "assets/icons/arrow-right.svg";
-import {ReactComponent as ArrowLeft} from "assets/icons/arrow-left.svg";
+import { ReactComponent as ArrowRight } from "assets/icons/arrow-right.svg";
+import { ReactComponent as ArrowLeft } from "assets/icons/arrow-left.svg";
 
 const Pagination = ({
   total = 0,
@@ -125,7 +125,12 @@ const Pagination = ({
         <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="block py-2 px-3 ml-0 cursor-pointer leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+          className={classNames(
+            "block py-2 px-3 ml-0 cursor-pointer leading-tight",
+            "text-gray-500 bg-white rounded-l-lg border border-gray-300",
+            "hover:bg-gray-100 hover:text-gray-700",
+            "disabled:hover:bg-white disabled:text-gray-300"
+          )}
         >
           <span className="sr-only">Previous</span>
           <ArrowLeft className="w-5 h-5" />
@@ -136,7 +141,12 @@ const Pagination = ({
         <button
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="block py-2 px-3 leading-tight cursor-pointer text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+          className={classNames(
+            "block py-2 px-3 leading-tight cursor-pointer",
+            "text-gray-500 bg-white rounded-r-lg border border-gray-300",
+            "hover:bg-gray-100 hover:text-gray-700",
+            "disabled:hover:bg-white disabled:text-gray-300"
+          )}
         >
           <span className="sr-only">Next</span>
           <ArrowRight className="w-5 h-5" />

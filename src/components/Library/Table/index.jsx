@@ -9,8 +9,6 @@ function Table({ data = 0, columns, selectDisplayItems }) {
   const [itemsPerPage, setItemsPerPage] = useState(selectDisplayItems[0].value);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // setTotalItems(data.length);
-
   return (
     <div>
       {/* Select | Search */}
@@ -18,7 +16,7 @@ function Table({ data = 0, columns, selectDisplayItems }) {
         <div className="flex space-x-1.5 items-center text-gray-700">
           <span>Show</span>
           <Select
-            selected={10}
+            selected={selectDisplayItems[0].value}
             options={selectDisplayItems}
             onChange={value => setItemsPerPage(value)}
             styles="w-16 inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 font-medium rounded-lg text-sm px-3 py-1"
