@@ -12,6 +12,7 @@ import {ReactComponent as Check} from "assets/icons/check.svg";
 
 // data
 import dataSelectors from "data/selectors.json";
+import DatePicker from "components/Library/DatePicker";
 
 /**
  * User Form Component
@@ -76,17 +77,15 @@ function EmployeeForm() {
 
             <div>
               <Label for="date-of-birth" text="Date of Birth" />
-              <Input
+              <DatePicker
                 id="date-of-birth"
                 name="dateOfBirth"
-                type="text"
-                placeholder="Picker"
               />
             </div>
 
             <div>
               <Label id="start-date" for="start-date" text="Start Date" />
-              <Input
+              <DatePicker
                 id="start-date"
                 name="startDate"
                 type="text"
