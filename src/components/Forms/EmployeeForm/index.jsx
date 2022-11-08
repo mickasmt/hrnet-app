@@ -1,18 +1,23 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import * as Yup from "yup";
+import { subYears } from "date-fns";
+import { Link } from "react-router-dom";
+
 import Label from "../Label";
 import Input from "../Input";
 import Fieldset from "../Fieldset";
+
+import DatePicker from "react-datepicker";
 import Modal from "components/Library/Modal";
 import Select from "components/Library/Select";
 import SubmitButton from "components/Buttons/SubmitButton";
 
-import {ReactComponent as Check} from "assets/icons/check.svg";
+import { ReactComponent as Check } from "assets/icons/check.svg";
+import { ReactComponent as HiChevronLeft } from "assets/icons/chevron-left.svg";
+import { ReactComponent as HiChevronRight } from "assets/icons/chevron-right.svg";
 
 // data
 import dataSelectors from "data/selectors.json";
-import DatePicker from "components/Library/DatePicker";
 
 /**
  * User Form Component
@@ -20,8 +25,11 @@ import DatePicker from "components/Library/DatePicker";
  * @returns {React.ReactElement}
  */
 function EmployeeForm() {
-  const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
+
+  const [birthDate, setBirthDate] = useState(subYears(new Date(), 16));
+  const [startDate, setStartDate] = useState(new Date());
 
   const closeModal = () => {
     setOpenModal(false);
@@ -78,18 +86,35 @@ function EmployeeForm() {
             <div>
               <Label for="date-of-birth" text="Date of Birth" />
               <DatePicker
-                id="date-of-birth"
                 name="dateOfBirth"
+                className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
+                selected={birthDate}
+                onChange={(date) => setBirthDate(date)}
+                peekNextMonth
+                showMonthDropdown
+                showYearDropdown
+                dropdownMode="select"
+                nextMonthButtonLabel={<HiChevronRight className="text-gray-700 w-6 h-6" />}
+                previousMonthButtonLabel={<HiChevronLeft className="text-gray-700 w-6 h-6" />}
+                minDate={subYears(new Date(), 70)}
+                maxDate={subYears(new Date(), 16)} // remove 16 years from now for the security (adult or intern only)
               />
             </div>
 
             <div>
               <Label id="start-date" for="start-date" text="Start Date" />
               <DatePicker
-                id="start-date"
                 name="startDate"
-                type="text"
-                placeholder="Picker"
+                className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+                peekNextMonth
+                showMonthDropdown
+                showYearDropdown
+                dropdownMode="select"
+                nextMonthButtonLabel={<HiChevronRight className="text-gray-700 w-6 h-6" />}
+                previousMonthButtonLabel={<HiChevronLeft className="text-gray-700 w-6 h-6" />}
+                maxDate={new Date()}
               />
             </div>
 

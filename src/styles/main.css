@@ -2,6 +2,8 @@
 @tailwind utilities;
 @tailwind components;
 
+@import url(./datepicker.css);
+
 html,
 body,
 #root {
