@@ -94,6 +94,7 @@ function EmployeeForm() {
                 showMonthDropdown
                 showYearDropdown
                 dropdownMode="select"
+                dateFormat="dd/MM/yyyy"
                 nextMonthButtonLabel={<HiChevronRight className="text-gray-700 w-6 h-6" />}
                 previousMonthButtonLabel={<HiChevronLeft className="text-gray-700 w-6 h-6" />}
                 minDate={subYears(new Date(), 70)}
@@ -112,6 +113,7 @@ function EmployeeForm() {
                 showMonthDropdown
                 showYearDropdown
                 dropdownMode="select"
+                dateFormat="dd/MM/yyyy"
                 nextMonthButtonLabel={<HiChevronRight className="text-gray-700 w-6 h-6" />}
                 previousMonthButtonLabel={<HiChevronLeft className="text-gray-700 w-6 h-6" />}
                 maxDate={new Date()}
