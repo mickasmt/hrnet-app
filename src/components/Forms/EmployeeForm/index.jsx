@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as Yup from "yup";
-import { subYears } from "date-fns";
+import { format, subYears } from "date-fns";
 import { Link } from "react-router-dom";
 
 import Label from "../Label";
@@ -35,6 +35,10 @@ function EmployeeForm() {
     setOpenModal(false);
   };
 
+  const resetUserForm = () => {
+    document.getElementById("user-form").reset();
+  };
+
   const validationSchema = Yup.object().shape({
     firstname: Yup.string()
       .min(2, "Firstname must be at least 2 characters")
@@ -42,24 +46,53 @@ function EmployeeForm() {
     lastname: Yup.string()
       .min(2, "Lastname must be at least 2 characters")
       .required("Lastname required !"),
+    startDate: format(startDate, "MM/dd/yyyy"),
+    dateOfBirth: format(birthDate, "MM/dd/yyyy"),
+    department: "department",
+    street: "street",
+    city: "city",
+    state: "state",
+    zipCode: Yup.string()
+      .required()
+      .matches(/^[0-9]+$/, "Must be only digits")
+      .min(5, "Must be exactly 5 digits")
+      .max(5, "Must be exactly 5 digits"),
   });
 
   const handleCreateUser = (e) => {
     e.preventDefault();
-    setLoading(true);
+    // setLoading(true);
     setOpenModal(true);
 
-    console.log("here");
-
     const formData = {
-      firstname: e.target.firstname.value,
-      lastname: e.target.lastname.value,
+      firstName: e.target.firstname.value,
+      lastName: e.target.lastname.value,
+      startDate: format(startDate, "MM/dd/yyyy"),
+      dateOfBirth: format(birthDate, "MM/dd/yyyy"),
+      department: e.target.department.value,
+      street: e.target.street.value,
+      city: e.target.city.value,
+      state: e.target.state.value,
+      zipCode: e.target.zipCode.value,
     };
+
+    // console.log(formData);
+
+    validationSchema
+      .validate(formData, { abortEarly: false })
+      .then(() => {
+        console.log('validation');
+        // resetUserForm();
+      })
+      .catch((err) => {
+        setLoading(false);
+        console.error(err);
+      });
   };
 
   return (
     <>
-      <form className="user-form" onSubmit={handleCreateUser}>
+      <form id="user-form" onSubmit={handleCreateUser}>
         <div className="flex flex-col md:flex-row gap-10">
           {/* first colunmn */}
           <div className="flex flex-col w-full space-y-4">
@@ -95,8 +128,12 @@ function EmployeeForm() {
                 showYearDropdown
                 dropdownMode="select"
                 dateFormat="dd/MM/yyyy"
-                nextMonthButtonLabel={<HiChevronRight className="text-gray-700 w-6 h-6" />}
-                previousMonthButtonLabel={<HiChevronLeft className="text-gray-700 w-6 h-6" />}
+                nextMonthButtonLabel={
+                  <HiChevronRight className="text-gray-700 w-6 h-6" />
+                }
+                previousMonthButtonLabel={
+                  <HiChevronLeft className="text-gray-700 w-6 h-6" />
+                }
                 minDate={subYears(new Date(), 70)}
                 maxDate={subYears(new Date(), 16)} // remove 16 years from now for the security (adult or intern only)
               />
@@ -114,8 +151,12 @@ function EmployeeForm() {
                 showYearDropdown
                 dropdownMode="select"
                 dateFormat="dd/MM/yyyy"
-                nextMonthButtonLabel={<HiChevronRight className="text-gray-700 w-6 h-6" />}
-                previousMonthButtonLabel={<HiChevronLeft className="text-gray-700 w-6 h-6" />}
+                nextMonthButtonLabel={
+                  <HiChevronRight className="text-gray-700 w-6 h-6" />
+                }
+                previousMonthButtonLabel={
+                  <HiChevronLeft className="text-gray-700 w-6 h-6" />
+                }
                 maxDate={new Date()}
               />
             </div>
@@ -182,6 +223,7 @@ function EmployeeForm() {
           </div>
         </div>
 
+        {/* Submit button */}
         <div className="mt-8 flex justify-end items-center">
           <SubmitButton name="Save" loading={loading} />
         </div>
