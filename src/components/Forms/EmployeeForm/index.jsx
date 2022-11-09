@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import * as Yup from "yup";
-import { format, subYears } from "date-fns";
 import { Link } from "react-router-dom";
+import { format, subYears } from "date-fns";
+import { yupErrorToErrorObject } from "utils/yup";
 
 import Label from "../Label";
 import Input from "../Input";
@@ -27,6 +28,7 @@ import dataSelectors from "data/selectors.json";
 function EmployeeForm() {
   const [loading, setLoading] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const [birthDate, setBirthDate] = useState(subYears(new Date(), 16));
   const [startDate, setStartDate] = useState(new Date());
@@ -37,21 +39,23 @@ function EmployeeForm() {
 
   const resetUserForm = () => {
     document.getElementById("user-form").reset();
+    setStartDate(new Date());
+    setBirthDate(subYears(new Date(), 16));
   };
 
   const validationSchema = Yup.object().shape({
-    firstname: Yup.string()
+    firstName: Yup.string()
       .min(2, "Firstname must be at least 2 characters")
       .required("Firstname required !"),
-    lastname: Yup.string()
+    lastName: Yup.string()
       .min(2, "Lastname must be at least 2 characters")
       .required("Lastname required !"),
-    startDate: format(startDate, "MM/dd/yyyy"),
-    dateOfBirth: format(birthDate, "MM/dd/yyyy"),
-    department: "department",
-    street: "street",
-    city: "city",
-    state: "state",
+    // startDate: format(startDate, "dd/MM/yyyy"),
+    // dateOfBirth: format(birthDate, "dd/MM/yyyy"),
+    // department: "department",
+    // street: "street",
+    // city: "city",
+    // state: "state",
     zipCode: Yup.string()
       .required()
       .matches(/^[0-9]+$/, "Must be only digits")
@@ -62,13 +66,13 @@ function EmployeeForm() {
   const handleCreateUser = (e) => {
     e.preventDefault();
     // setLoading(true);
-    setOpenModal(true);
+    // setOpenModal(true);
 
     const formData = {
       firstName: e.target.firstname.value,
       lastName: e.target.lastname.value,
-      startDate: format(startDate, "MM/dd/yyyy"),
-      dateOfBirth: format(birthDate, "MM/dd/yyyy"),
+      startDate: format(startDate, "dd/MM/yyyy"),
+      dateOfBirth: format(birthDate, "dd/MM/yyyy"),
       department: e.target.department.value,
       street: e.target.street.value,
       city: e.target.city.value,
@@ -82,11 +86,12 @@ function EmployeeForm() {
       .validate(formData, { abortEarly: false })
       .then(() => {
         console.log('validation');
-        // resetUserForm();
+        resetUserForm();
       })
       .catch((err) => {
         setLoading(false);
-        console.error(err);
+        setErrors(yupErrorToErrorObject(err));
+        // console.log(yupErrorToErrorObject(err));
       });
   };
 
