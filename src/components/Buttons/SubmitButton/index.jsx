@@ -4,11 +4,11 @@ import classNames from "classnames";
 import {ReactComponent as Spinner} from "assets/icons/spinner.svg";
 import {ReactComponent as HiArrowLongRight} from "assets/icons/arrow-long-right.svg";
 
-function SubmitButton({ loading, name }) {
+function SubmitButton({ loading, name, disabled }) {
   return (
     <button
       type="submit"
-      disabled={loading}
+      disabled={loading || disabled}
       className={classNames(
         "px-7 py-2.5 text-white ",
         "bg-lime-700 border border-lime-700",

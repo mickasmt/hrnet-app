@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import { format, subYears } from "date-fns";
@@ -19,6 +19,7 @@ import { ReactComponent as HiChevronRight } from "assets/icons/chevron-right.svg
 
 // data
 import dataSelectors from "data/selectors.json";
+import ErrorMessage from "../ErrorMessage";
 
 /**
  * User Form Component
@@ -26,12 +27,13 @@ import dataSelectors from "data/selectors.json";
  * @returns {React.ReactElement}
  */
 function EmployeeForm() {
-  const [loading, setLoading] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
-  const [birthDate, setBirthDate] = useState(subYears(new Date(), 16));
   const [startDate, setStartDate] = useState(new Date());
+  const [birthDate, setBirthDate] = useState(subYears(new Date(), 16));
 
   const closeModal = () => {
     setOpenModal(false);
@@ -52,10 +54,24 @@ function EmployeeForm() {
       .required("Lastname required !"),
     // startDate: format(startDate, "dd/MM/yyyy"),
     // dateOfBirth: format(birthDate, "dd/MM/yyyy"),
-    // department: "department",
-    // street: "street",
-    // city: "city",
-    // state: "state",
+    department: Yup.mixed()
+      .oneOf(
+        dataSelectors.departments.map((dp) => dp.value),
+        "Select one department !"
+      )
+      .required(),
+    street: Yup.string()
+      .min(2, "Street must be at least 2 characters")
+      .required("Street required !"),
+    city: Yup.string()
+      .min(2, "City must be at least 2 characters")
+      .required("City required !"),
+    state: Yup.mixed()
+      .oneOf(
+        dataSelectors.states.map((state) => state.value),
+        "Select one state !"
+      )
+      .required(),
     zipCode: Yup.string()
       .required()
       .matches(/^[0-9]+$/, "Must be only digits")
@@ -65,8 +81,7 @@ function EmployeeForm() {
 
   const handleCreateUser = (e) => {
     e.preventDefault();
-    // setLoading(true);
-    // setOpenModal(true);
+    setLoading(true);
 
     const formData = {
       firstName: e.target.firstname.value,
@@ -80,20 +95,26 @@ function EmployeeForm() {
       zipCode: e.target.zipCode.value,
     };
 
-    // console.log(formData);
-
     validationSchema
       .validate(formData, { abortEarly: false })
       .then(() => {
-        console.log('validation');
+        // insert date in json file
+        setOpenModal(true);
         resetUserForm();
       })
       .catch((err) => {
         setLoading(false);
         setErrors(yupErrorToErrorObject(err));
-        // console.log(yupErrorToErrorObject(err));
       });
   };
+
+  useEffect(() => {
+    if (errors) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  }, [errors]);
 
   return (
     <>
@@ -109,6 +130,7 @@ function EmployeeForm() {
                 type="text"
                 placeholder="Enter a firstname"
               />
+              {errors.firstName && <ErrorMessage errors={errors.firstName} />}
             </div>
 
             <div>
@@ -119,6 +141,7 @@ function EmployeeForm() {
                 type="text"
                 placeholder="Enter a firstname"
               />
+              {errors.lastName && <ErrorMessage errors={errors.lastName} />}
             </div>
 
             <div>
@@ -142,6 +165,9 @@ function EmployeeForm() {
                 minDate={subYears(new Date(), 70)}
                 maxDate={subYears(new Date(), 16)} // remove 16 years from now for the security (adult or intern only)
               />
+              {errors.dateOfBirth && (
+                <ErrorMessage errors={errors.dateOfBirth} />
+              )}
             </div>
 
             <div>
@@ -164,6 +190,7 @@ function EmployeeForm() {
                 }
                 maxDate={new Date()}
               />
+              {errors.startDate && <ErrorMessage errors={errors.startDate} />}
             </div>
 
             <div>
@@ -175,6 +202,7 @@ function EmployeeForm() {
                 placeholder="Select a department"
                 styles="w-full mt-1 rounded-md border-gray-200 shadow-sm sm:text-sm"
               />
+              {errors.department && <ErrorMessage errors={errors.department} />}
             </div>
           </div>
 
@@ -192,6 +220,7 @@ function EmployeeForm() {
                   type="text"
                   placeholder="Enter a street"
                 />
+                {errors.street && <ErrorMessage errors={errors.street} />}
               </div>
 
               <div>
@@ -202,6 +231,7 @@ function EmployeeForm() {
                   type="text"
                   placeholder="Enter a city"
                 />
+                {errors.city && <ErrorMessage errors={errors.city} />}
               </div>
 
               <div>
@@ -213,6 +243,7 @@ function EmployeeForm() {
                   placeholder="Select a state"
                   styles="w-full mt-1 rounded-md border-gray-200 shadow-sm sm:text-sm"
                 />
+                {errors.state && <ErrorMessage errors={errors.state} />}
               </div>
 
               <div>
@@ -223,6 +254,7 @@ function EmployeeForm() {
                   type="number"
                   placeholder="Enter a zip code"
                 />
+                {errors.zipCode && <ErrorMessage errors={errors.zipCode} />}
               </div>
             </Fieldset>
           </div>
@@ -230,7 +262,7 @@ function EmployeeForm() {
 
         {/* Submit button */}
         <div className="mt-8 flex justify-end items-center">
-          <SubmitButton name="Save" loading={loading} />
+          <SubmitButton name="Save" loading={loading} disabled={false} />
         </div>
       </form>
 
