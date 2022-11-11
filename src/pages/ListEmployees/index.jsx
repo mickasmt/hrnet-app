@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Title from "components/UI/Title";
 import Table from "components/Library/Table";
 
 // data
-import data from "data/employees.json";
 import dataSelectors from "data/selectors.json";
+import { EmployeesContext } from "utils/context";
 
 const columns = [
   { title: "First Name", data: "firstName" },
@@ -19,12 +19,14 @@ const columns = [
 ];
 
 function ListEmployees() {
+  const { employees } = useContext(EmployeesContext);
+
   return (
     <main className="f-container pt-6 pb-10 md:py-12">
       <Title text="List Employees" />
 
       <Table
-        items={data.employees}
+        items={employees}
         columns={columns}
         selectDisplayItems={dataSelectors.selectItemsTable}
       />

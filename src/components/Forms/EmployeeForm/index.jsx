@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
+import { EmployeesContext } from "utils/context";
 import { format, isDate, subYears } from "date-fns";
 import { parseDateString, yupErrorToErrorObject } from "utils/yup";
 
@@ -28,6 +29,7 @@ import dataSelectors from "data/selectors.json";
 function EmployeeForm() {
   const today = new Date();
   const yearsBefore = subYears(today, 16);
+  const { newEmployee } = useContext(EmployeesContext)
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -35,6 +37,7 @@ function EmployeeForm() {
 
   const [startDate, setStartDate] = useState(null);
   const [birthDate, setBirthDate] = useState(null);
+
 
   const closeModal = () => {
     setOpenModal(false);
@@ -63,7 +66,7 @@ function EmployeeForm() {
     dateOfBirth: Yup.date()
       .transform(parseDateString)
       .max(yearsBefore, "The employee must be 16 years or older")
-      .test("emptyBirthDate", "Invalide date !", () => isDate(birthDate)),
+      .test("emptyBirthDate", "Invalide date !", () => isDate(birthDate) ),
     startDate: Yup.date()
       .transform(parseDateString)
       .max(today, "Select a date less than today")
@@ -104,8 +107,8 @@ function EmployeeForm() {
     const formData = {
       firstName: e.target.firstname.value,
       lastName: e.target.lastname.value,
-      startDate: dateFormat(startDate),
-      dateOfBirth: dateFormat(birthDate),
+      // startDate: dateFormat(startDate),
+      // dateOfBirth: dateFormat(birthDate),
       department: e.target.department.value,
       street: e.target.street.value,
       city: e.target.city.value,
@@ -116,7 +119,16 @@ function EmployeeForm() {
     validationSchema
       .validate(formData, { abortEarly: false })
       .then(() => {
-        // insert date in json file
+        // insert dates in formData
+        const dates = {
+          startDate: dateFormat(startDate),
+          dateOfBirth: dateFormat(birthDate),
+        };
+
+        const fullFormData = Object.assign(formData, dates);
+        // console.log(fullFormData);
+        newEmployee(fullFormData);
+
         setOpenModal(true);
         setErrors({});
         resetUserForm();
@@ -130,7 +142,7 @@ function EmployeeForm() {
 
   useEffect(() => {
     if (errors) {
-      console.log(errors);
+      // console.log(errors);
     }
   }, [errors]);
 
