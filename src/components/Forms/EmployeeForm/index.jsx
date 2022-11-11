@@ -100,23 +100,12 @@ function EmployeeForm() {
   const handleCreateUser = (e) => {
     e.preventDefault();
     setLoading(true);
-    
-    // if(!startDate || !birthDate) {
-    //   setErrors(prevState => ({
-    //     ...prevState,
-    //     'startDate': [!startDate ? "Invalide date !" : ""],
-    //     'dateOfBirth': [!birthDate ? "Invalide date !" : ""]
-    //   }))
-
-    //   setLoading(false);
-    //   return
-    // }
 
     const formData = {
       firstName: e.target.firstname.value,
       lastName: e.target.lastname.value,
-      // startDate: dateFormat(startDate),
-      // dateOfBirth: dateFormat(birthDate),
+      startDate: dateFormat(startDate),
+      dateOfBirth: dateFormat(birthDate),
       department: e.target.department.value,
       street: e.target.street.value,
       city: e.target.city.value,
