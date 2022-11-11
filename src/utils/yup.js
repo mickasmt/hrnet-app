@@ -1,6 +1,16 @@
-// type ErrorObject = {
-//   [field: string]: string[];
-// };
+import { parse, isDate } from "date-fns";
+
+export function parseDateString(value, originalValue) {
+  // console.log('herre');
+  // console.log(value);
+  // console.log(originalValue);
+  const parsedDate = isDate(originalValue)
+    ? originalValue
+    : parse(originalValue, "dd/MM/yyyy", new Date());
+
+  return parsedDate;
+}
+
 
 /**
  * Convert yup error into an error object where the keys are the fields and the values are the errors for that field

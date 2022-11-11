@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+import DatePicker from "react-datepicker";
 import { format, subYears } from "date-fns";
-import { yupErrorToErrorObject } from "utils/yup";
+import { parseDateString, yupErrorToErrorObject } from "utils/yup";
 
 import Label from "../Label";
 import Input from "../Input";
 import Fieldset from "../Fieldset";
 
-import DatePicker from "react-datepicker";
+import ErrorMessage from "../ErrorMessage";
 import Modal from "components/Library/Modal";
 import Select from "components/Library/Select";
 import SubmitButton from "components/Buttons/SubmitButton";
@@ -19,21 +20,21 @@ import { ReactComponent as HiChevronRight } from "assets/icons/chevron-right.svg
 
 // data
 import dataSelectors from "data/selectors.json";
-import ErrorMessage from "../ErrorMessage";
 
 /**
- * User Form Component
- * @param {Function} toggleUserForm Function for display/hide user form
+ * Employee Form Component
  * @returns {React.ReactElement}
  */
 function EmployeeForm() {
+  const today = new Date();
+  const yearsBefore = subYears(today, 16);
+
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  const [disabled, setDisabled] = useState(false);
   const [openModal, setOpenModal] = useState(false);
 
-  const [startDate, setStartDate] = useState(new Date());
-  const [birthDate, setBirthDate] = useState(subYears(new Date(), 16));
+  const [startDate, setStartDate] = useState(null);
+  const [birthDate, setBirthDate] = useState(null);
 
   const closeModal = () => {
     setOpenModal(false);
@@ -41,9 +42,16 @@ function EmployeeForm() {
 
   const resetUserForm = () => {
     document.getElementById("user-form").reset();
-    setStartDate(new Date());
-    setBirthDate(subYears(new Date(), 16));
+    setStartDate(today);
+    setBirthDate(yearsBefore);
   };
+
+  const dateFormat = (date) => {
+    return format(date, "dd/MM/yyyy");
+  }
+
+  // regex address
+  const street_regex = /\d{1,}(\s{1}\w{1,})(\s{1}?\w{1,})+/g;
 
   const validationSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -52,8 +60,14 @@ function EmployeeForm() {
     lastName: Yup.string()
       .min(2, "Lastname must be at least 2 characters")
       .required("Lastname required !"),
-    // startDate: format(startDate, "dd/MM/yyyy"),
-    // dateOfBirth: format(birthDate, "dd/MM/yyyy"),
+    dateOfBirth: Yup.date()
+    .max(yearsBefore, "The employee must be 16 years or older")
+      .transform(parseDateString)
+      .required("Date of birthday required !"),
+    startDate: Yup.date()
+      .transform(parseDateString)
+      .max(today, "Select a date less than today")
+      .required("Start date required !"),
     department: Yup.mixed()
       .oneOf(
         dataSelectors.departments.map((dp) => dp.value),
@@ -62,6 +76,10 @@ function EmployeeForm() {
       .required(),
     street: Yup.string()
       .min(2, "Street must be at least 2 characters")
+      .matches(
+        street_regex,
+        "Street must contain at least one number and words"
+      )
       .required("Street required !"),
     city: Yup.string()
       .min(2, "City must be at least 2 characters")
@@ -73,7 +91,7 @@ function EmployeeForm() {
       )
       .required(),
     zipCode: Yup.string()
-      .required()
+      .required("Zip code required !")
       .matches(/^[0-9]+$/, "Must be only digits")
       .min(5, "Must be exactly 5 digits")
       .max(5, "Must be exactly 5 digits"),
@@ -82,12 +100,17 @@ function EmployeeForm() {
   const handleCreateUser = (e) => {
     e.preventDefault();
     setLoading(true);
+    
+    if(!startDate && !birthDate) {
+      setLoading(false);
+      return
+    }
 
     const formData = {
       firstName: e.target.firstname.value,
       lastName: e.target.lastname.value,
-      startDate: format(startDate, "dd/MM/yyyy"),
-      dateOfBirth: format(birthDate, "dd/MM/yyyy"),
+      startDate: dateFormat(startDate),
+      dateOfBirth: dateFormat(birthDate),
       department: e.target.department.value,
       street: e.target.street.value,
       city: e.target.city.value,
@@ -95,12 +118,16 @@ function EmployeeForm() {
       zipCode: e.target.zipCode.value,
     };
 
+    console.log(formData);
+
     validationSchema
       .validate(formData, { abortEarly: false })
       .then(() => {
         // insert date in json file
         setOpenModal(true);
+        setErrors({});
         resetUserForm();
+        setLoading(false);
       })
       .catch((err) => {
         setLoading(false);
@@ -110,9 +137,7 @@ function EmployeeForm() {
 
   useEffect(() => {
     if (errors) {
-      setDisabled(true);
-    } else {
-      setDisabled(false);
+      // console.log(errors);
     }
   }, [errors]);
 
@@ -151,6 +176,7 @@ function EmployeeForm() {
                 className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
                 selected={birthDate}
                 onChange={(date) => setBirthDate(date)}
+                placeholderText="Select a date"
                 peekNextMonth
                 showMonthDropdown
                 showYearDropdown
@@ -162,8 +188,8 @@ function EmployeeForm() {
                 previousMonthButtonLabel={
                   <HiChevronLeft className="text-gray-700 w-6 h-6" />
                 }
-                minDate={subYears(new Date(), 70)}
-                maxDate={subYears(new Date(), 16)} // remove 16 years from now for the security (adult or intern only)
+                minDate={subYears(today, 70)}
+                maxDate={yearsBefore} // remove 16 years from now for the security (adult or intern only)
               />
               {errors.dateOfBirth && (
                 <ErrorMessage errors={errors.dateOfBirth} />
@@ -177,6 +203,7 @@ function EmployeeForm() {
                 className="mt-1 w-full rounded-md border-gray-200 shadow-sm sm:text-sm"
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
+                placeholderText="Select a date"
                 peekNextMonth
                 showMonthDropdown
                 showYearDropdown
@@ -188,7 +215,7 @@ function EmployeeForm() {
                 previousMonthButtonLabel={
                   <HiChevronLeft className="text-gray-700 w-6 h-6" />
                 }
-                maxDate={new Date()}
+                maxDate={today}
               />
               {errors.startDate && <ErrorMessage errors={errors.startDate} />}
             </div>
@@ -262,7 +289,7 @@ function EmployeeForm() {
 
         {/* Submit button */}
         <div className="mt-8 flex justify-end items-center">
-          <SubmitButton name="Save" loading={loading} disabled={false} />
+          <SubmitButton name="Save" loading={loading} />
         </div>
       </form>
 
