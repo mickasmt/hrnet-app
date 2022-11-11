@@ -46,7 +46,6 @@
 .react-datepicker__header__dropdown--select select {
     @apply text-sm font-medium rounded-lg border border-gray-300 text-gray-800 bg-white focus:outline-none w-full cursor-pointer
 }
-
 /* end dropdown month / year */
 
 .react-datepicker__week {

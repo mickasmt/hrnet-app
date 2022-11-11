@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Title from "components/UI/Title";
 import Table from "components/Library/Table";
 
@@ -6,6 +6,7 @@ import Table from "components/Library/Table";
 import dataSelectors from "data/selectors.json";
 import { EmployeesContext } from "utils/context";
 
+// columns infos for table
 const columns = [
   { title: "First Name", data: "firstName" },
   { title: "Last Name", data: "lastName" },
@@ -18,8 +19,17 @@ const columns = [
   { title: "Zip Code", data: "zipCode" },
 ];
 
+/**
+ * List Employees Page
+ * @returns {React.ReactElement}
+ */
 function ListEmployees() {
   const { employees } = useContext(EmployeesContext);
+
+  useEffect(() => {
+    document.title = "List employees | Wealth Health";
+  }, []);
+
 
   return (
     <main className="f-container pt-6 pb-10 md:py-12">
