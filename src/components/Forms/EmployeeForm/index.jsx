@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
-import { format, subYears } from "date-fns";
+import { format, isDate, subYears } from "date-fns";
 import { parseDateString, yupErrorToErrorObject } from "utils/yup";
 
 import Label from "../Label";
@@ -61,13 +61,13 @@ function EmployeeForm() {
       .min(2, "Lastname must be at least 2 characters")
       .required("Lastname required !"),
     dateOfBirth: Yup.date()
-    .max(yearsBefore, "The employee must be 16 years or older")
       .transform(parseDateString)
-      .required("Date of birthday required !"),
+      .max(yearsBefore, "The employee must be 16 years or older")
+      .test("emptyBirthDate", "Invalide date !", () => isDate(birthDate)),
     startDate: Yup.date()
       .transform(parseDateString)
       .max(today, "Select a date less than today")
-      .required("Start date required !"),
+      .test("emptyStartDate", "Invalide date !", () => isDate(startDate)),
     department: Yup.mixed()
       .oneOf(
         dataSelectors.departments.map((dp) => dp.value),
@@ -101,24 +101,28 @@ function EmployeeForm() {
     e.preventDefault();
     setLoading(true);
     
-    if(!startDate && !birthDate) {
-      setLoading(false);
-      return
-    }
+    // if(!startDate || !birthDate) {
+    //   setErrors(prevState => ({
+    //     ...prevState,
+    //     'startDate': [!startDate ? "Invalide date !" : ""],
+    //     'dateOfBirth': [!birthDate ? "Invalide date !" : ""]
+    //   }))
+
+    //   setLoading(false);
+    //   return
+    // }
 
     const formData = {
       firstName: e.target.firstname.value,
       lastName: e.target.lastname.value,
-      startDate: dateFormat(startDate),
-      dateOfBirth: dateFormat(birthDate),
+      // startDate: dateFormat(startDate),
+      // dateOfBirth: dateFormat(birthDate),
       department: e.target.department.value,
       street: e.target.street.value,
       city: e.target.city.value,
       state: e.target.state.value,
       zipCode: e.target.zipCode.value,
     };
-
-    console.log(formData);
 
     validationSchema
       .validate(formData, { abortEarly: false })
@@ -137,7 +141,7 @@ function EmployeeForm() {
 
   useEffect(() => {
     if (errors) {
-      // console.log(errors);
+      console.log(errors);
     }
   }, [errors]);
 

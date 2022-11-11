@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { EmployeesProvider } from "utils/context";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // styles
@@ -17,7 +18,7 @@ import Layout from "components/Layout";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    {/* <Provider store={store}> */}
+    <EmployeesProvider>
       <Router>
         <Layout>
           <Routes>
@@ -28,6 +29,6 @@ root.render(
           </Routes>
         </Layout>
       </Router>
-    {/* </Provider> */}
+    </EmployeesProvider>
   </React.StrictMode>
 );
