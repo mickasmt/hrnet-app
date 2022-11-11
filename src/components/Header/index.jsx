@@ -9,7 +9,6 @@ import Logo from "components/UI/Logo";
 function Header() {
   return (
     <nav
-      aria-label="Site Nav"
       className="f-container flex items-center justify-between p-4"
     >
       <Link

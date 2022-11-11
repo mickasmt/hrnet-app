@@ -6,8 +6,8 @@ import React from "react";
  */
 function Footer() {
   return (
-    <footer className="footer">
-      <p className="footer-text">Copyright 2022 </p>
+    <footer className="f-container flex items-center justify-center px-4">
+      <p className="footer-text">Copyright 2022 - Mickael S.</p>
     </footer>
   );
 }

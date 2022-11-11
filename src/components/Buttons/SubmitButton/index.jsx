@@ -1,10 +1,19 @@
 import React from "react";
+import PropTypes from "prop-types";
 import classNames from "classnames";
 
+// icons
 import {ReactComponent as Spinner} from "assets/icons/spinner.svg";
 import {ReactComponent as HiArrowLongRight} from "assets/icons/arrow-long-right.svg";
 
-function SubmitButton({ loading, name, disabled }) {
+/**
+ * Submit Button Component
+ * @param {string} name Name of the submit button
+ * @param {boolean} loading Loading value form
+ * @param {boolean} disabled Disabled value form
+ * @returns {React.ReactElement}
+ */
+function SubmitButton({ loading = false, name, disabled }) {
   return (
     <button
       type="submit"
@@ -32,5 +41,14 @@ function SubmitButton({ loading, name, disabled }) {
     </button>
   );
 }
+
+SubmitButton.propTypes = {
+  /** Name of submit button */
+  name: PropTypes.string.isRequired,
+  /** Loading value */
+  loading: PropTypes.bool,
+  /** Disabled value */
+  disabled: PropTypes.bool,
+};
 
 export default SubmitButton;

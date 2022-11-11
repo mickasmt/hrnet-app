@@ -11,7 +11,6 @@ function NewEmployee() {
     document.title = "New employee | Wealth Health";
   }, []);
 
-
   return (
     <main className="f-container pt-6 pb-10 md:py-12">
       <Title text="Create Employee" />

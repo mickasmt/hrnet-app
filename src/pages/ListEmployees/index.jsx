@@ -30,7 +30,6 @@ function ListEmployees() {
     document.title = "List employees | Wealth Health";
   }, []);
 
-
   return (
     <main className="f-container pt-6 pb-10 md:py-12">
       <Title text="List Employees" />

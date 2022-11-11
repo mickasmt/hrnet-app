@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import HomeCard from "components/Cards/HomeCard";
 
+// icons
 import {ReactComponent as HiUserPlus} from "assets/icons/user-plus.svg";
 import {ReactComponent as HiUserGroup} from "assets/icons/user-group.svg";
 

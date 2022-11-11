@@ -40,12 +40,12 @@ HomeCard.propTypes = {
     id: PropTypes.number.isRequired,
     /** Icon of card home info */
     icon: PropTypes.elementType.isRequired,
+    /** Link of card home info */
+    href: PropTypes.string.isRequired,
     /** Title of card home info */
     title: PropTypes.string.isRequired,
     /** Description of card home info */
     description: PropTypes.string.isRequired,
-    /** Link of card home info */
-    href: PropTypes.string.isRequired,
   }),
 };
 

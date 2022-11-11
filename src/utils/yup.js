@@ -1,9 +1,6 @@
 import { parse, isDate } from "date-fns";
 
 export function parseDateString(value, originalValue) {
-  // console.log('herre');
-  // console.log(value);
-  // console.log(originalValue);
   const parsedDate = isDate(originalValue)
     ? originalValue
     : parse(originalValue, "dd/MM/yyyy", new Date());
