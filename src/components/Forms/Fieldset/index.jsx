@@ -1,5 +1,13 @@
 import React from "react";
+import PropTypes from "prop-types";
 
+/**
+ * Fieldset Component
+ * @param {string} name Name of the fieldset
+ * @param {string} classnames Styles for fieldset ui
+ * @param {React.ReactNode} children 
+ * @returns {React.ReactElement}
+ */
 function Fieldset({ name, classnames, children }) {
   return (
     <fieldset
@@ -12,5 +20,14 @@ function Fieldset({ name, classnames, children }) {
     </fieldset>
   );
 }
+
+Fieldset.propTypes = {
+  /** Name of the fieldset */
+  name: PropTypes.string.isRequired,
+  /** Styles for fieldset ui */
+  classnames: PropTypes.string,
+  /** Childrens components */
+  children: PropTypes.elementType.isRequired,
+};
 
 export default Fieldset;

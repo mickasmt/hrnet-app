@@ -1,20 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
-import DatePicker from "react-datepicker";
 import { EmployeesContext } from "utils/context";
 import { format, isDate, subYears } from "date-fns";
 import { parseDateString, yupErrorToErrorObject } from "utils/yup";
 
+// components
 import Label from "../Label";
 import Input from "../Input";
 import Fieldset from "../Fieldset";
-
+import DatePicker from "react-datepicker";
 import ErrorMessage from "../ErrorMessage";
 import Modal from "components/Library/Modal";
 import Select from "components/Library/Select";
 import SubmitButton from "components/Buttons/SubmitButton";
 
+// icons
 import { ReactComponent as Check } from "assets/icons/check.svg";
 import { ReactComponent as HiChevronLeft } from "assets/icons/chevron-left.svg";
 import { ReactComponent as HiChevronRight } from "assets/icons/chevron-right.svg";
@@ -37,7 +38,6 @@ function EmployeeForm() {
 
   const [startDate, setStartDate] = useState(null);
   const [birthDate, setBirthDate] = useState(null);
-
 
   const closeModal = () => {
     setOpenModal(false);
