@@ -1,7 +1,13 @@
+import PropTypes from "prop-types";
 import React, { useState } from "react";
 
 import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
 
+/**
+ * Search for Table Component
+ * @param {function} onPageChange Function for onChange on search input
+ * @returns {React.ReactElement}
+ */
 function Search({ onSearch }) {
   const [search, setSearch] = useState("");
 
@@ -28,4 +34,7 @@ function Search({ onSearch }) {
   );
 }
 
+Search.propTypes = {
+  onSearch: PropTypes.func.isRequired,
+};
 export default Search;

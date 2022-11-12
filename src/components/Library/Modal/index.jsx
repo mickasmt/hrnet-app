@@ -1,6 +1,20 @@
 import React from "react";
 import { Fragment } from "react";
+import PropTypes from "prop-types";
 
+/**
+ * Modal Component
+ * @param {React.ReactNode} icon Icon  top left on the modal 
+ * @param {string} iconBgColor Background color for the icon
+ * @param {string} title Title of the modal
+ * @param {string} description Description of the modal
+ * @param {Array} buttons Array of the buttons in footer modal
+ * @param {function} onClose Function for close the modal
+ * @param {React.ReactNode} children 
+ * @param {string} overlayColor Background color for the modal overlay
+ * @param {string} overlayOpacity Opacity of background color for the modal overlay
+ * @returns {React.ReactElement}
+ */
 function Modal({
   icon,
   iconBgColor,
@@ -100,5 +114,17 @@ function Modal({
     </div>
   );
 }
+
+Modal.propTypes = {
+  icon: PropTypes.string,
+  iconBgColor: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  buttons: PropTypes.array,
+  onClose: PropTypes.func,
+  children: PropTypes.elementType,
+  overlayColor: PropTypes.string,
+  overlayOpacity: PropTypes.string,
+};
 
 export default Modal;

@@ -27,7 +27,7 @@ Fieldset.propTypes = {
   /** Styles for fieldset ui */
   classnames: PropTypes.string,
   /** Childrens components */
-  children: PropTypes.elementType.isRequired,
+  children: PropTypes.array,
 };
 
 export default Fieldset;

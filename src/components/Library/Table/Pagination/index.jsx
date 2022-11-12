@@ -1,9 +1,19 @@
+import PropTypes from "prop-types";
 import classNames from "classnames";
 import React, { useEffect, useState, useMemo } from "react";
 
+// icons
 import { ReactComponent as ArrowRight } from "assets/icons/arrow-right.svg";
 import { ReactComponent as ArrowLeft } from "assets/icons/arrow-left.svg";
 
+/**
+ * Pagination for Table Component
+ * @param {number} total Length of total items
+ * @param {number} itemsPerPage Number items display per page
+ * @param {number} currentPage index of the current page displayed (default : 1)
+ * @param {function} onPageChange Function for onChange on pagination
+ * @returns {React.ReactElement}
+ */
 const Pagination = ({
   total,
   itemsPerPage,
@@ -92,6 +102,13 @@ const Pagination = ({
       </ul>
     </nav>
   );
+};
+
+Pagination.propTypes = {
+  total: PropTypes.number.isRequired,
+  itemsPerPage: PropTypes.number.isRequired,
+  currentPage: PropTypes.number,
+  onPageChange: PropTypes.func.isRequired,
 };
 
 export default Pagination;
