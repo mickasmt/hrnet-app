@@ -39,7 +39,7 @@ HomeCard.propTypes = {
     /** ID of card home info */
     id: PropTypes.number.isRequired,
     /** Icon of card home info */
-    icon: PropTypes.elementType.isRequired,
+    icon: PropTypes.element.isRequired,
     /** Link of card home info */
     href: PropTypes.string.isRequired,
     /** Title of card home info */
