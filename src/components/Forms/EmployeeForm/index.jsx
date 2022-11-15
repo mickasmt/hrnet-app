@@ -11,8 +11,7 @@ import Input from "../Input";
 import Fieldset from "../Fieldset";
 import DatePicker from "react-datepicker";
 import ErrorMessage from "../ErrorMessage";
-import Modal from "components/Library/Modal";
-import Select from "components/Library/Select";
+import { Modal, Select } from "react-hrnet-plugins";
 import SubmitButton from "components/Buttons/SubmitButton";
 
 // icons

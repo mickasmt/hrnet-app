@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import Title from "components/UI/Title";
-import Table from "components/Library/Table";
+import { Table } from "react-hrnet-plugins";
 
 // data
 import dataSelectors from "data/selectors.json";
