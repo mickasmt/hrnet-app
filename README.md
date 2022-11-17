@@ -4,7 +4,7 @@
 
 ### 1.1 Description
 
-ArgentBank is a banking app where the user can connect to his account and see his last transactions.
+Hrnet is a management app where the user can insert/list data employees in a database.
 
 ### 1.2 Dependencies
 
