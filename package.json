@@ -28,6 +28,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "jest": "jest --coverage --noStackTrace --silent",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -49,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "jest": "^29.3.1",
     "react-test-renderer": "^18.2.0"
   }
 }
