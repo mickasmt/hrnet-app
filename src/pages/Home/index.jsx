@@ -33,7 +33,7 @@ function Home() {
   }, []);
 
   return (
-    <main className="h-full md:h-3/4 w-full flex justify-center md:items-center f-container">
+    <main className="h-full md:h-3/4 w-full flex justify-center md:items-center f-container" data-testid="home-main">
       <div className="w-full flex flex-col space-y-4 md:flex-row md:space-x-5 md:space-y-0">
         {homeInfos.map((info) => {
           return <HomeCard data={info} key={info.id} />;
