@@ -15,6 +15,7 @@ body,
 }
 
 @font-face {
+  font-display: swap;
   font-family: "CopperGothicReg";
   src: url("/src/assets/fonts/copper-gothic-reg.woff2") format("woff2");
 }

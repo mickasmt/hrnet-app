@@ -12,7 +12,7 @@ function NewEmployee() {
   }, []);
 
   return (
-    <main className="f-container pt-6 pb-10 md:py-12">
+    <main className="f-container pt-6 pb-10 md:py-12" data-testid="new-employee-main">
       <Title text="Create Employee" />
       <EmployeeForm />
     </main>

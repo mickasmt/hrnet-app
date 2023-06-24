@@ -15,9 +15,9 @@ function HomeCard({ data }) {
           {data.icon}
         </span>
 
-        <h3 className="mt-2.5 text-lg font-medium text-gray-900">
+        <h1 className="mt-2.5 text-lg font-medium text-gray-900">
           {data.title}
-        </h3>
+        </h1>
 
         <p className="mt-2 text-sm leading-relaxed text-gray-500 line-clamp-3">
           {data.description}
